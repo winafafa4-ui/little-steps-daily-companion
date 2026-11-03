@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HabitsRouteImport } from './routes/habits'
+import { Route as MoreRouteImport } from './routes/more'
+import { Route as ProgressRouteImport } from './routes/progress'
+import { Route as RoutinesRouteImport } from './routes/routines'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HabitsRoute = HabitsRouteImport.update({
+  id: '/habits',
+  path: '/habits',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MoreRoute = MoreRouteImport.update({
+  id: '/more',
+  path: '/more',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgressRoute = ProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoutinesRoute = RoutinesRouteImport.update({
+  id: '/routines',
+  path: '/routines',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/habits': typeof HabitsRoute
+  '/more': typeof MoreRoute
+  '/progress': typeof ProgressRoute
+  '/routines': typeof RoutinesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/habits': typeof HabitsRoute
+  '/more': typeof MoreRoute
+  '/progress': typeof ProgressRoute
+  '/routines': typeof RoutinesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/habits': typeof HabitsRoute
+  '/more': typeof MoreRoute
+  '/progress': typeof ProgressRoute
+  '/routines': typeof RoutinesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/habits' | '/more' | '/progress' | '/routines'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/habits' | '/more' | '/progress' | '/routines'
+  id: '__root__' | '/' | '/habits' | '/more' | '/progress' | '/routines'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HabitsRoute: typeof HabitsRoute
+  MoreRoute: typeof MoreRoute
+  ProgressRoute: typeof ProgressRoute
+  RoutinesRoute: typeof RoutinesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/habits': {
+      id: '/habits'
+      path: '/habits'
+      fullPath: '/habits'
+      preLoaderRoute: typeof HabitsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/more': {
+      id: '/more'
+      path: '/more'
+      fullPath: '/more'
+      preLoaderRoute: typeof MoreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/progress': {
+      id: '/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof ProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/routines': {
+      id: '/routines'
+      path: '/routines'
+      fullPath: '/routines'
+      preLoaderRoute: typeof RoutinesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HabitsRoute: HabitsRoute,
+  MoreRoute: MoreRoute,
+  ProgressRoute: ProgressRoute,
+  RoutinesRoute: RoutinesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
