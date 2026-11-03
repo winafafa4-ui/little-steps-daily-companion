@@ -9,8 +9,8 @@ export function toISO(d: Date): string {
 }
 
 export function fromISO(iso: string): Date {
-  const [y, m, d] = iso.split("-").map(Number);
-  return new Date(y, (m ?? 1) - 1, d ?? 1);
+  const [y = 1970, m = 1, d = 1] = iso.split("-").map(Number);
+  return new Date(y, m - 1, d);
 }
 
 export function todayISO(): string {

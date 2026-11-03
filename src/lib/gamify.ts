@@ -52,6 +52,11 @@ const dayScore = (state: AppState, date: string): number => {
   return Math.round((habitPart * 0.5 + routinePart * 0.3 + taskPart * 0.2) * 100);
 };
 
+/** The daily discipline score (0–100) shown on the dashboard and in progress reports. */
+export function dailyScore(state: AppState, date: string): number {
+  return dayScore(state, date);
+}
+
 export const ACHIEVEMENTS: Achievement[] = [
   { id: "first-habit", name: "First Step", description: "Created your first habit", icon: "🌱", check: (s) => s.habits.length >= 1 },
   { id: "five-habits", name: "Architect", description: "Tracking 5 habits at once", icon: "🧩", check: (s) => s.habits.filter((h) => !h.archived).length >= 5 },

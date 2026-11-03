@@ -36,9 +36,9 @@ export function deleteRoutine(id: string) {
 export function reorderSteps(routineId: string, from: number, to: number) {
   setState((d) => {
     const r = d.routines.find((x) => x.id === routineId);
-    if (!r || to < 0 || to >= r.steps.length) return;
+    if (!r || from >= r.steps.length || to < 0 || to > r.steps.length) return;
     const [step] = r.steps.splice(from, 1);
-    r.steps.splice(to, 0, step);
+    if (step) r.steps.splice(to, 0, step);
   });
 }
 

@@ -204,9 +204,13 @@ export const LEVELS = [
 
 export function levelFor(xp: number) {
   let idx = 0;
-  for (let i = 0; i < LEVELS.length; i++) if (xp >= LEVELS[i].minXp) idx = i;
+  for (let i = 0; i < LEVELS.length; i++) {
+    const lvl = LEVELS[i];
+    if (lvl && xp >= lvl.minXp) idx = i;
+  }
+  const current = LEVELS[idx] ?? LEVELS[0]!;
   const next = LEVELS[idx + 1];
-  const base = LEVELS[idx].minXp;
+  const base = current.minXp;
   const progress = next ? (xp - base) / (next.minXp - base) : 1;
-  return { index: idx, name: LEVELS[idx].name, next, progress: Math.max(0, Math.min(1, progress)) };
+  return { index: idx, name: current.name, next, progress: Math.max(0, Math.min(1, progress)) };
 }
