@@ -3,7 +3,7 @@ import { habitsDueOn, isDone, toggleHabit, currentStreak } from "@/lib/habits";
 import { todayISO } from "@/lib/dates";
 import { Card, Empty, Page, PageHeader } from "@/components/app/bits";
 import { appHead } from "@/lib/head";
-import { Link } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/habits")({
   head: () => appHead("Habits — Discipline Habit Builder", "Track your habits, streaks and daily progress."),

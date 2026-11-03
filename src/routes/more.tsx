@@ -1,3 +1,4 @@
+import { createFileRoute } from '@tanstack/react-router'
 import { Page, PageHeader } from "@/components/app/bits";
 import { appHead } from "@/lib/head";
 import { ACHIEVEMENTS, levelFor } from "@/lib/gamify";

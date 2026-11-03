@@ -1,3 +1,4 @@
+import { createFileRoute } from '@tanstack/react-router'
 import { useAppState } from "@/lib/store";
 import { dailyScore, levelFor } from "@/lib/gamify";
 import { lastNDates, todayISO } from "@/lib/dates";

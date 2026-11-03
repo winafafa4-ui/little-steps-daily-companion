@@ -1,3 +1,4 @@
+import { createFileRoute } from '@tanstack/react-router'
 import { useAppState } from "@/lib/store";
 import { routineProgress } from "@/lib/routines";
 import { todayISO } from "@/lib/dates";
