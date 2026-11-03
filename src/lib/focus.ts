@@ -26,7 +26,7 @@ export function focusMinutesByDay(state: { focusSessions: FocusSession[] }, date
   for (const s of state.focusSessions) {
     const day = new Date(s.startedAt);
     const key = `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, "0")}-${String(day.getDate()).padStart(2, "0")}`;
-    if (key in out) out[key] += s.minutes;
+    if (key in out) out[key] = (out[key] ?? 0) + s.minutes;
   }
   return out;
 }

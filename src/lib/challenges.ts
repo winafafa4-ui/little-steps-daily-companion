@@ -36,7 +36,7 @@ export const CHALLENGE_TEMPLATES: ChallengeTemplate[] = [
         "Get up on time and do one thing you enjoy before obligations",
         "Get up on time, even if you slept imperfectly",
         "Get up on time and plan how to keep this going next week",
-      ][Math.min(day - 1, 6)];
+      ][Math.min(day - 1, 6)] ?? "";
     },
   },
   {
@@ -111,7 +111,7 @@ export const CHALLENGE_TEMPLATES: ChallengeTemplate[] = [
         "Charge your phone outside the bedroom tonight",
         "Replace one scrolling session with a walk or a book",
         "Define your permanent phone rules for after this week",
-      ][Math.min(day - 1, 6)];
+      ][Math.min(day - 1, 6)] ?? "";
     },
   },
   {
