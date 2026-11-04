@@ -84,8 +84,8 @@ function Onboarding() {
       }
     }
     void pickedNames;
-    if (morningSteps.length > 0) createRoutine("Morning routine", "morning", morningSteps);
-    if (eveningSteps.length > 0) createRoutine("Evening routine", "evening", eveningSteps);
+    if (morningSteps.length > 0) createRoutine("Morning routine", "morning", morningSteps.map((s) => ({ ...s, note: "" })));
+    if (eveningSteps.length > 0) createRoutine("Evening routine", "evening", eveningSteps.map((s) => ({ ...s, note: "" })));
     navigate({ to: "/" });
   }
 
