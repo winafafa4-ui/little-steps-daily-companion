@@ -2,6 +2,7 @@
 // missing a day never erases them.
 
 import { levelFor, type AppState, type DisciplineCategory } from "./model";
+export { levelFor } from "./model";
 import { addDaysISO, todayISO, weekStartISO, daysBetween } from "./dates";
 import { newId, setState, snapshot } from "./store";
 import { habitsDueOn, isDone, currentStreak } from "./habits";
