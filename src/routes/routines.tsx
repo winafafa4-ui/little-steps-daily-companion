@@ -148,21 +148,3 @@ function RoutineCreator({ onDone }: { onDone: () => void }) {
     </div>
   );
 }
-
-export function StepReorder({ routineId, steps }: { routineId: string; steps: RoutineStep[] }) {
-  const move = (from: number, dir: -1 | 1) => {
-    const to = from + dir;
-    if (to < 0 || to >= steps.length) return;
-    const next = [...steps];
-    const [s] = next.splice(from, 1);
-    if (s) next.splice(to, 0, s);
-    updateRoutine(routineId, { steps: next });
-  };
-  return (
-    <div className="flex flex-col gap-0.5">
-      <button type="button" onClick={() => move(0, -1) || void 0} className="hidden" aria-hidden />
-      <ChevronUp className="hidden" />
-      <ChevronDown className="hidden" />
-    </div>
-  );
-}
