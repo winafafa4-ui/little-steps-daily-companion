@@ -241,3 +241,66 @@ export const CATEGORY_META: Record<string, { label: string; icon: string }> = {
   lifestyle: { label: "Lifestyle", icon: "🌿" },
   responsibility: { label: "Responsibility", icon: "🏠" },
 };
+
+export const inputCls =
+  "w-full rounded-xl border border-input bg-background px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-ring";
+
+export function Field({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <label className="block">
+      <span className="mb-1 block text-xs font-medium text-muted-foreground">{label}</span>
+      {children}
+    </label>
+  );
+}
+
+export function PrimaryButton({
+  children,
+  onClick,
+  disabled,
+  className,
+  type = "button",
+}: {
+  children: ReactNode;
+  onClick?: () => void;
+  disabled?: boolean;
+  className?: string;
+  type?: "button" | "submit";
+}) {
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={cn(
+        "press rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-40",
+        className,
+      )}
+    >
+      {children}
+    </button>
+  );
+}
+
+export function GhostButton({
+  children,
+  onClick,
+  className,
+}: {
+  children: ReactNode;
+  onClick?: () => void;
+  className?: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "press rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground",
+        className,
+      )}
+    >
+      {children}
+    </button>
+  );
+}
