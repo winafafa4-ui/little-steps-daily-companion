@@ -19,6 +19,7 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as RoutinesRouteImport } from './routes/routines'
 import { Route as TasksRouteImport } from './routes/tasks'
+import { Route as HabitsIdRouteImport } from './routes/habits.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -70,43 +71,51 @@ const TasksRoute = TasksRouteImport.update({
   path: '/tasks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HabitsIdRoute = HabitsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => HabitsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/digital': typeof DigitalRoute
   '/focus': typeof FocusRoute
-  '/habits': typeof HabitsRoute
+  '/habits': typeof HabitsRouteWithChildren
   '/journal': typeof JournalRoute
   '/more': typeof MoreRoute
   '/onboarding': typeof OnboardingRoute
   '/progress': typeof ProgressRoute
   '/routines': typeof RoutinesRoute
   '/tasks': typeof TasksRoute
+  '/habits/$id': typeof HabitsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/digital': typeof DigitalRoute
   '/focus': typeof FocusRoute
-  '/habits': typeof HabitsRoute
+  '/habits': typeof HabitsRouteWithChildren
   '/journal': typeof JournalRoute
   '/more': typeof MoreRoute
   '/onboarding': typeof OnboardingRoute
   '/progress': typeof ProgressRoute
   '/routines': typeof RoutinesRoute
   '/tasks': typeof TasksRoute
+  '/habits/$id': typeof HabitsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/digital': typeof DigitalRoute
   '/focus': typeof FocusRoute
-  '/habits': typeof HabitsRoute
+  '/habits': typeof HabitsRouteWithChildren
   '/journal': typeof JournalRoute
   '/more': typeof MoreRoute
   '/onboarding': typeof OnboardingRoute
   '/progress': typeof ProgressRoute
   '/routines': typeof RoutinesRoute
   '/tasks': typeof TasksRoute
+  '/habits/$id': typeof HabitsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/routines'
     | '/tasks'
+    | '/habits/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/routines'
     | '/tasks'
+    | '/habits/$id'
   id:
     | '__root__'
     | '/'
@@ -145,13 +156,14 @@ export interface FileRouteTypes {
     | '/progress'
     | '/routines'
     | '/tasks'
+    | '/habits/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DigitalRoute: typeof DigitalRoute
   FocusRoute: typeof FocusRoute
-  HabitsRoute: typeof HabitsRoute
+  HabitsRoute: typeof HabitsRouteWithChildren
   JournalRoute: typeof JournalRoute
   MoreRoute: typeof MoreRoute
   OnboardingRoute: typeof OnboardingRoute
@@ -232,14 +244,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TasksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/habits/$id': {
+      id: '/habits/$id'
+      path: '/$id'
+      fullPath: '/habits/$id'
+      preLoaderRoute: typeof HabitsIdRouteImport
+      parentRoute: typeof HabitsRoute
+    }
   }
 }
+
+interface HabitsRouteChildren {
+  HabitsIdRoute: typeof HabitsIdRoute
+}
+
+const HabitsRouteChildren: HabitsRouteChildren = {
+  HabitsIdRoute: HabitsIdRoute,
+}
+
+const HabitsRouteWithChildren =
+  HabitsRoute._addFileChildren(HabitsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DigitalRoute: DigitalRoute,
   FocusRoute: FocusRoute,
-  HabitsRoute: HabitsRoute,
+  HabitsRoute: HabitsRouteWithChildren,
   JournalRoute: JournalRoute,
   MoreRoute: MoreRoute,
   OnboardingRoute: OnboardingRoute,
