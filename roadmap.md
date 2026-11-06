@@ -1,0 +1,3 @@
+- [ ] Add Routine Mode, Academy, Challenges, Goals, Bad Habit Breaker, and Settings screens.
+- [ ] Replace More placeholders and complete Progress with data-backed achievements and timeline.
+- [ ] Fix route/type errors, page metadata, and verify routing plus key offline workflows.

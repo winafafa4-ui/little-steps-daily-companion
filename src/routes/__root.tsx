@@ -78,11 +78,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Discipline Habit Builder" },
+      { name: "description", content: "Build discipline with habits, routines, and reflection — fully offline." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Discipline Habit Builder" },
+      { property: "og:description", content: "Build discipline with habits, routines, and reflection — fully offline." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -117,6 +117,27 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const applyTheme = () => {
+    const preference = typeof window === "undefined" ? "system" : window.localStorage.getItem("dhb-state-v1");
+    let theme = "system";
+    try {
+      theme = preference ? (JSON.parse(preference)?.profile?.theme ?? "system") : "system";
+    } catch {
+      theme = "system";
+    }
+    const dark = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.classList.toggle("dark", dark);
+  };
+  useEffect(() => {
+    applyTheme();
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    media.addEventListener("change", applyTheme);
+    window.addEventListener("storage", applyTheme);
+    return () => {
+      media.removeEventListener("change", applyTheme);
+      window.removeEventListener("storage", applyTheme);
+    };
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
