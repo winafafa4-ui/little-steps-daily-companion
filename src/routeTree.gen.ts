@@ -20,6 +20,7 @@ import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as RoutinesRouteImport } from './routes/routines'
 import { Route as TasksRouteImport } from './routes/tasks'
 import { Route as HabitsIdRouteImport } from './routes/habits.$id'
+import { Route as RoutinesIdRouteImport } from './routes/routines.$id_'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -76,6 +77,11 @@ const HabitsIdRoute = HabitsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => HabitsRoute,
 } as any)
+const RoutinesIdRoute = RoutinesIdRouteImport.update({
+  id: '/$id_',
+  path: '/$id',
+  getParentRoute: () => RoutinesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -86,9 +92,10 @@ export interface FileRoutesByFullPath {
   '/more': typeof MoreRoute
   '/onboarding': typeof OnboardingRoute
   '/progress': typeof ProgressRoute
-  '/routines': typeof RoutinesRoute
+  '/routines': typeof RoutinesRouteWithChildren
   '/tasks': typeof TasksRoute
   '/habits/$id': typeof HabitsIdRoute
+  '/routines/$id': typeof RoutinesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -99,9 +106,10 @@ export interface FileRoutesByTo {
   '/more': typeof MoreRoute
   '/onboarding': typeof OnboardingRoute
   '/progress': typeof ProgressRoute
-  '/routines': typeof RoutinesRoute
+  '/routines': typeof RoutinesRouteWithChildren
   '/tasks': typeof TasksRoute
   '/habits/$id': typeof HabitsIdRoute
+  '/routines/$id': typeof RoutinesIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -113,9 +121,10 @@ export interface FileRoutesById {
   '/more': typeof MoreRoute
   '/onboarding': typeof OnboardingRoute
   '/progress': typeof ProgressRoute
-  '/routines': typeof RoutinesRoute
+  '/routines': typeof RoutinesRouteWithChildren
   '/tasks': typeof TasksRoute
   '/habits/$id': typeof HabitsIdRoute
+  '/routines/$id_': typeof RoutinesIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,6 +140,7 @@ export interface FileRouteTypes {
     | '/routines'
     | '/tasks'
     | '/habits/$id'
+    | '/routines/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
     | '/routines'
     | '/tasks'
     | '/habits/$id'
+    | '/routines/$id'
   id:
     | '__root__'
     | '/'
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/routines'
     | '/tasks'
     | '/habits/$id'
+    | '/routines/$id_'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -168,7 +180,7 @@ export interface RootRouteChildren {
   MoreRoute: typeof MoreRoute
   OnboardingRoute: typeof OnboardingRoute
   ProgressRoute: typeof ProgressRoute
-  RoutinesRoute: typeof RoutinesRoute
+  RoutinesRoute: typeof RoutinesRouteWithChildren
   TasksRoute: typeof TasksRoute
 }
 
@@ -251,6 +263,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HabitsIdRouteImport
       parentRoute: typeof HabitsRoute
     }
+    '/routines/$id_': {
+      id: '/routines/$id_'
+      path: '/$id'
+      fullPath: '/routines/$id'
+      preLoaderRoute: typeof RoutinesIdRouteImport
+      parentRoute: typeof RoutinesRoute
+    }
   }
 }
 
@@ -265,6 +284,18 @@ const HabitsRouteChildren: HabitsRouteChildren = {
 const HabitsRouteWithChildren =
   HabitsRoute._addFileChildren(HabitsRouteChildren)
 
+interface RoutinesRouteChildren {
+  RoutinesIdRoute: typeof RoutinesIdRoute
+}
+
+const RoutinesRouteChildren: RoutinesRouteChildren = {
+  RoutinesIdRoute: RoutinesIdRoute,
+}
+
+const RoutinesRouteWithChildren = RoutinesRoute._addFileChildren(
+  RoutinesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DigitalRoute: DigitalRoute,
@@ -274,7 +305,7 @@ const rootRouteChildren: RootRouteChildren = {
   MoreRoute: MoreRoute,
   OnboardingRoute: OnboardingRoute,
   ProgressRoute: ProgressRoute,
-  RoutinesRoute: RoutinesRoute,
+  RoutinesRoute: RoutinesRouteWithChildren,
   TasksRoute: TasksRoute,
 }
 export const routeTree = rootRouteImport
