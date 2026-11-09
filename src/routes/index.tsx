@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Card, Page, Ring } from "@/components/app/bits";
 import { useAppState } from "@/lib/store";
 import { dailyScore, levelFor } from "@/lib/gamify";
@@ -17,6 +17,8 @@ export const Route = createFileRoute("/")({
 function Home() {
   const state = useAppState();
   const today = todayISO();
+  const [dayGreeting, setDayGreeting] = useState("Welcome back");
+  useEffect(() => setDayGreeting(greeting()), []);
   const lvl = levelFor(state.xp);
   const due = habitsDueOn(state, today);
   const doneToday = due.filter((h) => isDone(h, state.habitLogs[h.id], today));
@@ -31,7 +33,7 @@ function Home() {
         <div>
           <p className="text-sm text-muted-foreground">{fmtLong(today)}</p>
           <h1 className="font-display text-2xl font-semibold tracking-tight text-foreground">
-            {greeting()}
+            {dayGreeting}
             {state.profile.name ? `, ${state.profile.name}` : ""}
           </h1>
         </div>
@@ -63,7 +65,7 @@ function Home() {
       <h2 className="mb-2 mt-6 text-sm font-semibold uppercase tracking-wide text-muted-foreground">Habits today</h2>
       {due.length === 0 ? (
         <Card className="text-center text-sm text-muted-foreground">
-          No habits yet. Open the app's onboarding from Settings once it's wired up, or check back after the next build step.
+          No habits yet. Add your first habit or personalize your setup from Settings.
         </Card>
       ) : (
         <div className="space-y-2">

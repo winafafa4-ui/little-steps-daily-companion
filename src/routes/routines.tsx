@@ -52,7 +52,7 @@ function Routines() {
                     const p = routineProgress(state, r.id, today);
                     return (
                       <Card key={r.id}>
-                        <Link to="/routines/$id_" params={{ id: r.id }} className="flex items-center justify-between gap-3">
+                        <Link to="/routines/$id" params={{ id: r.id }} className="flex items-center justify-between gap-3">
                           <div className="min-w-0">
                             <div className="truncate font-medium text-foreground">{r.name}</div>
                             <div className="text-xs text-muted-foreground">

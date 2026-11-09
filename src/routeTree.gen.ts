@@ -10,14 +10,19 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AcademyRouteImport } from './routes/academy'
+import { Route as BadHabitsRouteImport } from './routes/bad-habits'
+import { Route as ChallengesRouteImport } from './routes/challenges'
 import { Route as DigitalRouteImport } from './routes/digital'
 import { Route as FocusRouteImport } from './routes/focus'
+import { Route as GoalsRouteImport } from './routes/goals'
 import { Route as HabitsRouteImport } from './routes/habits'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as MoreRouteImport } from './routes/more'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as RoutinesRouteImport } from './routes/routines'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as TasksRouteImport } from './routes/tasks'
 import { Route as HabitsIdRouteImport } from './routes/habits.$id'
 import { Route as RoutinesIdRouteImport } from './routes/routines.$id_'
@@ -25,6 +30,21 @@ import { Route as RoutinesIdRouteImport } from './routes/routines.$id_'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyRoute = AcademyRouteImport.update({
+  id: '/academy',
+  path: '/academy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BadHabitsRoute = BadHabitsRouteImport.update({
+  id: '/bad-habits',
+  path: '/bad-habits',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChallengesRoute = ChallengesRouteImport.update({
+  id: '/challenges',
+  path: '/challenges',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DigitalRoute = DigitalRouteImport.update({
@@ -35,6 +55,11 @@ const DigitalRoute = DigitalRouteImport.update({
 const FocusRoute = FocusRouteImport.update({
   id: '/focus',
   path: '/focus',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GoalsRoute = GoalsRouteImport.update({
+  id: '/goals',
+  path: '/goals',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HabitsRoute = HabitsRouteImport.update({
@@ -67,6 +92,11 @@ const RoutinesRoute = RoutinesRouteImport.update({
   path: '/routines',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TasksRoute = TasksRouteImport.update({
   id: '/tasks',
   path: '/tasks',
@@ -85,28 +115,38 @@ const RoutinesIdRoute = RoutinesIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/academy': typeof AcademyRoute
+  '/bad-habits': typeof BadHabitsRoute
+  '/challenges': typeof ChallengesRoute
   '/digital': typeof DigitalRoute
   '/focus': typeof FocusRoute
+  '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRouteWithChildren
   '/journal': typeof JournalRoute
   '/more': typeof MoreRoute
   '/onboarding': typeof OnboardingRoute
   '/progress': typeof ProgressRoute
   '/routines': typeof RoutinesRouteWithChildren
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
   '/habits/$id': typeof HabitsIdRoute
   '/routines/$id': typeof RoutinesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/academy': typeof AcademyRoute
+  '/bad-habits': typeof BadHabitsRoute
+  '/challenges': typeof ChallengesRoute
   '/digital': typeof DigitalRoute
   '/focus': typeof FocusRoute
+  '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRouteWithChildren
   '/journal': typeof JournalRoute
   '/more': typeof MoreRoute
   '/onboarding': typeof OnboardingRoute
   '/progress': typeof ProgressRoute
   '/routines': typeof RoutinesRouteWithChildren
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
   '/habits/$id': typeof HabitsIdRoute
   '/routines/$id': typeof RoutinesIdRoute
@@ -114,14 +154,19 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/academy': typeof AcademyRoute
+  '/bad-habits': typeof BadHabitsRoute
+  '/challenges': typeof ChallengesRoute
   '/digital': typeof DigitalRoute
   '/focus': typeof FocusRoute
+  '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRouteWithChildren
   '/journal': typeof JournalRoute
   '/more': typeof MoreRoute
   '/onboarding': typeof OnboardingRoute
   '/progress': typeof ProgressRoute
   '/routines': typeof RoutinesRouteWithChildren
+  '/settings': typeof SettingsRoute
   '/tasks': typeof TasksRoute
   '/habits/$id': typeof HabitsIdRoute
   '/routines/$id_': typeof RoutinesIdRoute
@@ -130,42 +175,57 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/academy'
+    | '/bad-habits'
+    | '/challenges'
     | '/digital'
     | '/focus'
+    | '/goals'
     | '/habits'
     | '/journal'
     | '/more'
     | '/onboarding'
     | '/progress'
     | '/routines'
+    | '/settings'
     | '/tasks'
     | '/habits/$id'
     | '/routines/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/academy'
+    | '/bad-habits'
+    | '/challenges'
     | '/digital'
     | '/focus'
+    | '/goals'
     | '/habits'
     | '/journal'
     | '/more'
     | '/onboarding'
     | '/progress'
     | '/routines'
+    | '/settings'
     | '/tasks'
     | '/habits/$id'
     | '/routines/$id'
   id:
     | '__root__'
     | '/'
+    | '/academy'
+    | '/bad-habits'
+    | '/challenges'
     | '/digital'
     | '/focus'
+    | '/goals'
     | '/habits'
     | '/journal'
     | '/more'
     | '/onboarding'
     | '/progress'
     | '/routines'
+    | '/settings'
     | '/tasks'
     | '/habits/$id'
     | '/routines/$id_'
@@ -173,14 +233,19 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AcademyRoute: typeof AcademyRoute
+  BadHabitsRoute: typeof BadHabitsRoute
+  ChallengesRoute: typeof ChallengesRoute
   DigitalRoute: typeof DigitalRoute
   FocusRoute: typeof FocusRoute
+  GoalsRoute: typeof GoalsRoute
   HabitsRoute: typeof HabitsRouteWithChildren
   JournalRoute: typeof JournalRoute
   MoreRoute: typeof MoreRoute
   OnboardingRoute: typeof OnboardingRoute
   ProgressRoute: typeof ProgressRoute
   RoutinesRoute: typeof RoutinesRouteWithChildren
+  SettingsRoute: typeof SettingsRoute
   TasksRoute: typeof TasksRoute
 }
 
@@ -191,6 +256,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy': {
+      id: '/academy'
+      path: '/academy'
+      fullPath: '/academy'
+      preLoaderRoute: typeof AcademyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bad-habits': {
+      id: '/bad-habits'
+      path: '/bad-habits'
+      fullPath: '/bad-habits'
+      preLoaderRoute: typeof BadHabitsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/challenges': {
+      id: '/challenges'
+      path: '/challenges'
+      fullPath: '/challenges'
+      preLoaderRoute: typeof ChallengesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/digital': {
@@ -205,6 +291,13 @@ declare module '@tanstack/react-router' {
       path: '/focus'
       fullPath: '/focus'
       preLoaderRoute: typeof FocusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/goals': {
+      id: '/goals'
+      path: '/goals'
+      fullPath: '/goals'
+      preLoaderRoute: typeof GoalsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/habits': {
@@ -247,6 +340,13 @@ declare module '@tanstack/react-router' {
       path: '/routines'
       fullPath: '/routines'
       preLoaderRoute: typeof RoutinesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tasks': {
@@ -298,14 +398,19 @@ const RoutinesRouteWithChildren = RoutinesRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AcademyRoute: AcademyRoute,
+  BadHabitsRoute: BadHabitsRoute,
+  ChallengesRoute: ChallengesRoute,
   DigitalRoute: DigitalRoute,
   FocusRoute: FocusRoute,
+  GoalsRoute: GoalsRoute,
   HabitsRoute: HabitsRouteWithChildren,
   JournalRoute: JournalRoute,
   MoreRoute: MoreRoute,
   OnboardingRoute: OnboardingRoute,
   ProgressRoute: ProgressRoute,
   RoutinesRoute: RoutinesRouteWithChildren,
+  SettingsRoute: SettingsRoute,
   TasksRoute: TasksRoute,
 }
 export const routeTree = rootRouteImport
